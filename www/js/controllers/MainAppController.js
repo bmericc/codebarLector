@@ -2,10 +2,7 @@
     'use strict';
     var module = angular.module('MainApp', []);
 
-    module.controller('MainAppController', function($scope, $http, $sce, userData, shoppingCart, sortOptions) {
-        $scope.userData = userData;
-        $scope.shoppingCart = shoppingCart;
-        $scope.sortOptions = sortOptions;
+    module.controller('MainAppController', function($scope, $http, $sce) {
         $scope.categories = [];
         $scope.products = null;
         $scope.lastCategory = [];
@@ -448,22 +445,16 @@
         $scope.categoryPageInit = function() {
             $scope.connectionFail = false;
             var categoryID = 0;
-            if (ons.navigator) {
+           /* if (ons.navigator) {
                 if (ons.navigator.getCurrentPage().options.categoryID) {
                     categoryID = ons.navigator.getCurrentPage().options.categoryID;
                 }
             }
-            $scope.getCategory(categoryID);
+            $scope.getCategory(categoryID);*/
 
         }
 
         $scope.init = function() {
-            $scope.categoryPageInit();
-            $scope.getCarrouselData();
-
-            $scope.userData.sendPushNotificationToken(window.localStorage.getItem("pushNotificationToken"));
-
-
 
         }
 

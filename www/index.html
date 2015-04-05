@@ -15,13 +15,11 @@
 </head>
 
 <body ng-controller="MainAppController" ng-init-old="deviceType === 'browser'?init():null" ng-init='init()'>
-    <!--     <ons-sliding-menu above-page="templates/TabBarBottom.html" behind-page="templates/MenuSide.html" side="left" max-slide-distance="250px" swipe-target-width="50px" var="menu">
+
+   <!--  <ons-sliding-menu menu-page="templates/MenuSide.html" main-page="templates/TabBarBottom.html" side="left" var="menu" type="reveal" max-slide-distance="250px" swipe-target-width="50px" swipable="true">
     </ons-sliding-menu> -->
 
-
-    <ons-sliding-menu menu-page="templates/MenuSide.html" main-page="templates/TabBarBottom.html" side="left" var="menu" type="reveal" max-slide-distance="250px" swipe-target-width="50px" swipable="true">
-    </ons-sliding-menu>
-
+    <ng-include src="'templates/barCodeTester.html'"></ng-include>
 
     <script src="lib/onsen/js/angular/angular.min.js"></script>
     <script src="lib/onsen/js/angular/angular-sanitize.js"></script>
