@@ -422,7 +422,7 @@
         }
 
         $scope.barCodeScan = function() {
-            scanner.startScanning(null, barCodeScanSuccess);
+            scanner.startScanning(null, $scope.barCodeScanSuccess);
             //cordova.plugins.barcodeScanner.scan($scope.barCodeScanSuccess, $scope.barCodeScanError);
         }
 
