@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<widget id="com.weremsoft.lectordeCB" version="2.0.1" android-versionCode="20" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0"  xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>Lector de CB</name>
+<widget id="com.weremsoft.lectordeCB2" version="2.0.1" android-versionCode="20" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0"  xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Lector de CB 2</name>
     <description>
         Tienda especializada en equipo de escalada y montaña. Las mejores marcas, Petzl, Edelrid, Mammut, Edelweiss, Beal, Salewa, Marmot, Lowe Alpine, Wild Country, Altus y muchas mas.
     </description>
