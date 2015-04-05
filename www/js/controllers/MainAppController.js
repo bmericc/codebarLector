@@ -422,7 +422,7 @@
         }
 
         $scope.barCodeScan = function() {
-            cordova.plugins.barcodeScanner.scan($scope.barCodeScanSuccess,$scope.barCodeScanError);           );
+            cordova.plugins.barcodeScanner.scan($scope.barCodeScanSuccess,$scope.barCodeScanError);
             //cordova.plugins.barcodeScanner.scan($scope.barCodeScanSuccess, $scope.barCodeScanError);
         }
 
