@@ -430,11 +430,10 @@
                 "Result: " + result.text + "\n" +
                 "Format: " + result.format + "\n" +
                 "Cancelled: " + result.cancelled);*/
-            if (result.cancelled) {
-                prompt('Lectura Cancelada');
-            } else {
-                $scope.showProduct(result.text, true);
-            }
+            messageWindow("We got a barcode\n" +
+                "Result: " + result.text + "\n" +
+                "Format: " + result.format + "\n" +
+                "Cancelled: " + result.cancelled);
 
         }
 
@@ -445,12 +444,12 @@
         $scope.categoryPageInit = function() {
             $scope.connectionFail = false;
             var categoryID = 0;
-           /* if (ons.navigator) {
-                if (ons.navigator.getCurrentPage().options.categoryID) {
-                    categoryID = ons.navigator.getCurrentPage().options.categoryID;
-                }
-            }
-            $scope.getCategory(categoryID);*/
+            /* if (ons.navigator) {
+                 if (ons.navigator.getCurrentPage().options.categoryID) {
+                     categoryID = ons.navigator.getCurrentPage().options.categoryID;
+                 }
+             }
+             $scope.getCategory(categoryID);*/
 
         }
 
