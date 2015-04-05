@@ -422,7 +422,8 @@
         }
 
         $scope.barCodeScan = function() {
-            cordova.plugins.barcodeScanner.scan($scope.barCodeScanSuccess, $scope.barCodeScanError);
+            scanner.startScanning();
+            //cordova.plugins.barcodeScanner.scan($scope.barCodeScanSuccess, $scope.barCodeScanError);
         }
 
         $scope.barCodeScanSuccess = function(result) {
