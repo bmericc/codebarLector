@@ -422,25 +422,20 @@
         }
 
         $scope.barCodeScan = function() {
-            scanner.startScanning(null, $scope.barCodeScanSuccess);
+            cordova.plugins.barcodeScanner.scan($scope.barCodeScanSuccess,$scope.barCodeScanError);           );
             //cordova.plugins.barcodeScanner.scan($scope.barCodeScanSuccess, $scope.barCodeScanError);
         }
 
         $scope.barCodeScanSuccess = function(result) {
-
-            /*           prompt("We got a barcode\n" +
+            messageWindow("We got a barcode\n" +
                 "Result: " + result.text + "\n" +
                 "Format: " + result.format + "\n" +
-                "Cancelled: " + result.cancelled);*/
-            messageWindow("We got a barcode\n" +
-                "Result: " + result.code + "\n" +
-                "Format: " + result.type + (result.isGS1 ? " (GS1)" : "") + "\n" +
-                "Cancelled: " + (result.type == 'Cancel' ? true : false));
+                "Cancelled: " + result.cancelled);
 
         }
 
         $scope.barCodeScanError = function(error) {
-            promptError("Scanning failed: " + error);
+            messageWindowError("Scanning failed: " + error);
         }
 
         $scope.categoryPageInit = function() {
