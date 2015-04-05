@@ -1,0 +1,118 @@
+<ons-page>
+    <module-header></module-header>
+    <div class="content-padded" ng-hide="loading">
+        <ons-row style="margin-top: 0px;">
+            <ons-col align="center">
+                <br>
+                <div>{{product.title}}</div>
+                <div ng-repeat="slide in product.images">
+                    <div class="frame-for-featured-image" ng-show="$first">
+                        <img class="featured-image" ng-click="ons.navigator.pushPage('templates/pages/PageProductImageDetail.html')" src="{{'http://www.nakaoutdoors.com.ar/img/articulos/'+ currentSlide}}" />
+                    </div>
+                </div>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <div class="image-frame bottom-image-picker" style="text-align:center;">
+                    <div class="image-frame-for-picker image-frame" ng-repeat="slide in product.images">
+                        <img class="image-picker-item" ng-click="setCurrentSlide(slide)" src="{{'http://www.nakaoutdoors.com.ar/img/articulos/'+ slide}}" />
+                    </div>
+                </div>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 0px;">
+            <ons-col align="center">
+                <ons-list>
+                    <ons-list-item ng-controller="CartController">
+                        <ons-row style="margin-top: 10px;">
+                            <ons-col align="center">
+                                <ons-button ng-click="quantityDecrement()">
+                                    <ons-icon icon="minus"></ons-icon>
+                                </ons-button>
+                                <input type="number" min="1" ng-model="cantidad" class="text-input number-input" style="margin-top: 8px;" placeholder="Cantidad">
+                                <ons-button ng-click="quantityIncrement()">
+                                    <ons-icon icon="plus"></ons-icon>
+                                </ons-button>
+                            </ons-col>
+                        </ons-row>
+                        <ons-row style="margin-top: 10px;">
+                            <ons-col>
+                                <ons-button modifier="large" class="boton_solicitar_informacion" ng-click="ons.navigator.pushPage('templates/forms/FormQuestionOnProduct.html')">Solicitar Información</ons-button>
+                            </ons-col>
+                        </ons-row>
+                        <ons-row style="margin-top: 10px;">
+                            <ons-col>
+                                <ons-button ng-show="product.options" modifier="large--cta" class="boton_select" ng-click="genericSelectStart(product.options, 'talle.id','talle.name', 'name', 'id', null, this, compareProductOptionsForSort, 'templates/modules/combo/TalleSelectPage.html')">
+                                    {{talle.id?talle.name:' Elija una opción '}}<ons-icon ng-hide="talle.id" icon="caret-square-o-down"></ons-icon></ons-button>
+                            </ons-col>
+                        </ons-row>
+                        <ons-row style="margin-top: 10px;margin-bottom:10px">
+                            <ons-col align="center">
+                                <ons-button modifier="large" class="boton_agregar_al_carrito" should-spin="{{isWorking}}" ng-click="addToCart()">Agregar al Carrito</ons-button>
+                            </ons-col>
+                        </ons-row>
+
+                    </ons-list-item>
+                    <ons-list-header>
+                        <ons-row>
+                            <ons-col align="center">
+                                <i class="fa fa-credit-card"></i>
+                                <span class="product-debit-credit-label">Débito/Crédito :</span>
+                                <span class="product-debit-credit-price">${{product.credit_price}}</span>
+                            </ons-col>
+                        </ons-row>
+                        <ons-row>
+                            <ons-col align="center">
+                                <i class="fa fa-money"></i>
+                                <span class="product-contado-label">Efectivo -10% :</span>
+                                <span class="product-contado-price" ng-class="{'stryke-trough': (product.offer > 0)}">${{product.price}}</span>
+                            </ons-col>
+                        </ons-row>
+                        <ons-row>
+                            <ons-col align="center" ng-if="product.offer > 0">
+                                <i class="fa fa-certificate"></i>
+                                <span class="product-contado-label">Oferta -{{product.offer}}% :</span>
+                                <span class="product-contado-price">${{product.offer_price}}</span>
+                            </ons-col>
+                        </ons-row>
+                        <ons-row>
+                            <ons-col align="center">
+                                <module-stock-color-codes></module-stock-color-codes>
+                            </ons-col>
+                            <ons-col align="center">
+                                <!-- NUEVO -->
+                                <!-- <ons-icon ng-if="product.new==1" icon="certificate" style="color:red"></ons-icon>
+                                {{product.new=='1'?'Nuevo!':''}} -->
+                            </ons-col>
+                        </ons-row>
+                    </ons-list-header>
+                    <ons-list-header style="padding-left: 0px;">
+                        <img style="width:100%; height:auto" src="http://imgmp.mlstatic.com/org-img/banners/ar/medios/online/575X40.jpg">
+                    </ons-list-header>
+                    <ons-list-item modifier="chevron" ng-click="ons.navigator.pushPage('templates/pages/PageProductDetail.html', {productDetails: product.body})">
+                        <ons-icon icon="info-circle"></ons-icon>Detalles del Producto</ons-list-item>
+
+                    <ons-list-item modifier="chevron" ng-click="ons.navigator.pushPage('templates/pages/PageProductQuestions.html', {productQuestions: product.questions})">
+                        <ons-icon icon="comments-o"></ons-icon>{{product.questions_count == 0?'Sea el primero en consultar.':'Consultas (' + product.questions_count + ')' }}</ons-list-item>
+
+                    <ons-list-item ng-if="product.reviews_count > 0" modifier="chevron" ng-click="ons.navigator.pushPage('templates/pages/PageProductsRatings.html', {productQuestions: product.questions})">
+
+                        <ons-icon ng-repeat="star in product.stars" ng-class="'dark-orange'" icon="{{star.value==1?'star':'star-o'}}"></ons-icon>({{product.reviews_count}})</ons-list-item>
+
+                    <ons-list-item ng-if="product.reviews_count == 0" modifier="chevron">
+                        <ons-icon ng-class="'dark-orange'" icon="star-o"></ons-icon>Sin calificaciones aún.</ons-list-item>
+
+                    <ons-list-item ng-if="product.video" modifier="chevron" ng-click="ons.navigator.pushPage('templates/pages/PageProductViewVideo.html')">
+                        <ons-icon icon="youtube-play" ng-class="'youtube-red'"></ons-icon>Ver video del producto</ons-list-item>
+                </ons-list>
+
+                <br>
+                <!--<div style="margin-top: 10px;">
+                    <ons-button modifier="large" ng-click="ons.navigator.pushPage('templates/pages/PageProductAddToCart.html')">Agregar al Carrito</ons-button>
+                </div>-->
+            </ons-col>
+        </ons-row>
+    </div>
+    <module-loading-spinner ng-show="loading"></module-loading-spinner>
+</ons-page>

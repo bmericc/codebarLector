@@ -1,0 +1,228 @@
+<ons-page ng-controller="CartController" ng-init="init()">
+    <module-header></module-header>
+    <form novalidate name="formPedido" ng-submit="enviarPedido()">
+
+        <div class="content-padded">
+            <div class="panel">
+                <div class="panel-heading">Ingrese sus datos para finalizar su pedido. </div>
+                <div class="panel-body">
+                    <label>Nombre(*):</label>
+                    <input type="text" ng-model="userData.profileData.nombre" class="text-input--underbar" placeholder="Nombre" value="" required>
+
+                    <label>Apellido(*):</label>
+                    <input type="text" ng-model="userData.profileData.apellido" class="text-input--underbar" placeholder="Apellido" value="" required>
+
+                    <label>e-mail(*):</label>
+                    <input type="email" ng-model="userData.profileData.mail" class="text-input--underbar" placeholder="Email" value="" required>
+
+                    <label>Telefono(*):</label>
+                    <input type="text" ng-model="userData.profileData.telefono" class="text-input--underbar" placeholder="telefono" value="" required>
+
+                    <label>Código de área:</label>
+                    <input type="text" ng-model="userData.profileData.cod_area" class="text-input--underbar" placeholder="código de área" value="">
+
+                    <label>Celular:</label>
+                    <input type="text" ng-model="userData.profileData.celular" class="text-input--underbar" placeholder="celular" value="">
+
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    Datos de envío y seguro</div>
+                <div class="panel-body">
+
+                    <ons-row style="margin-top: 10px;">
+                        <ons-col>
+                            <div class="alert-b alert-b-info" role="alert">
+                                Le recomendamos asegurar el envío. Hemos experimentado robos en cajas a las empresas de transporte. Si usted decide no asegurar la compra, Nakaoutdoors no se hace responsable una vez despachada la caja en la empresa de encomiendas y usted está aceptando estas condiciones. El valor para el seguro del envío, será el 2% de la suma asegurada:<br>
+                                $ {{Math.round(Math.min(shoppingCart.cartData.summary.off_amount,shoppingCart.cartData.summary.amount) * 0.02)}} para pago en efectivo.<br>
+                                $ {{Math.round(shoppingCart.cartData.summary.credit_amount * 0.02)}} para el pago con tarjeta de crédito.
+                            </div>
+                        </ons-col>
+                    </ons-row>
+
+                    <ons-row style="margin-top: 10px;">
+                        <ons-col>
+                            <label>Tipo de envío(*):</label>
+                            <ons-button modifier="large--cta" ng-click="genericSelectStart(buyOptions.shipping_types, 'tipoSeguro.id','tipoSeguro.name', 'name', 'id', null, this)">
+                                <ons-icon icon="truck"></ons-icon>&nbsp
+                                <ons-icon icon="lock"></ons-icon>&nbsp{{tipoSeguro.id?findInArrayById(buyOptions.shipping_types, tipoSeguro.id, 'id', 'name'):'-- Seleccionar tipo de envío --'}}</ons-button>
+                            <br>
+                        </ons-col>
+                    </ons-row>
+                    <div ng-if="tipoSeguro.id === 1">
+                        <ons-row style="margin-top: 10px;">
+                            <ons-col>
+                                <label>Sucursal(*):</label>
+                                <ons-button modifier="large--cta" ng-click="genericSelectStart(buyOptions.sucursal_options, 'sucursal.id','sucursal.name', 'name', 'id', null, this)">
+                                    <ons-icon icon="map-marker"></ons-icon>&nbsp{{sucursal.id?findInArrayById(buyOptions.sucursal_options, sucursal.id, 'id', 'name'):'-- Seleccionar sucursal (*) --'}}</ons-button>
+                                <br>
+                            </ons-col>
+                        </ons-row>
+                        <ons-row style="margin-top: 10px;">
+                            <ons-col>
+                                <div class="alert-b alert-b-info" role="alert">
+                                    Su compra será reservada por un plazo máximo de 5 días hábiles. Superado el plazo NO garantizamos el stock de su pedido. Recuerda que puedes pagar por Mercado Pago y retirar en Local con cualquiera de estas tarjetas!
+                                    <img style="width:100%; height:auto" src="http://imgmp.mlstatic.com/org-img/banners/ar/medios/online/575X40.jpg">
+                                </div>
+                            </ons-col>
+                        </ons-row>
+                    </div>
+                    <ons-row style="margin-top: 10px;" ng-if="tipoSeguro.id === 2">
+                        <ons-col>
+                            <div class="alert-b alert-b-info" role="alert">
+                                Su envío se encuentra asegurado, la suma total será de:<br><br>
+
+                                ${{Math.min(shoppingCart.cartData.summary.off_amount,shoppingCart.cartData.summary.amount)}} (importe de la compra) + ${{Math.round(Math.min(shoppingCart.cartData.summary.off_amount,shoppingCart.cartData.summary.amount) * 0.02)}} (importe del seguro) para pago en efectivo.<br><br>
+
+                                ${{shoppingCart.cartData.summary.credit_amount}} (importe de la compra) + ${{Math.round(shoppingCart.cartData.summary.credit_amount * 0.02)}} (importe del seguro) para pago con tarjeta.<br><br>
+
+
+                                Los costos de envío son abonados al retirar en terminal y dependen de la empresa de transportes. Importante: La caja será cerrada con una faja de seguridad impresa que dice "Nakaoutdoors - Faja de seguridad, verifique que no haya sido violada". Si cuando usted recibe el paquete en terminal observa signos de que la faja fue cortada o la caja violada, no retire el paquete, realice el reclamo y avísenos inmediatamente. Si usted retira la caja y luego descubre que hay faltantes, el seguro pierde validez.
+                            </div>
+                        </ons-col>
+                    </ons-row>
+
+                    <ons-row style="margin-top: 10px;" ng-if="tipoSeguro.id === 3">
+                        <ons-col>
+                            <div class="alert-b alert-b-info" role="alert">
+                                Usted selecciono su envío sin asegurar. Nakaoutdoors no se reponsabiliza por robos una vez despachado el paquete en la empresa de transportes.
+                            </div>
+                        </ons-col>
+                    </ons-row>
+
+                    <ons-row style="margin-top: 10px;" ng-show="tipoSeguro.id === 2 || tipoSeguro.id === 3">
+                        <ons-col>
+                            <label>Forma de envío(*):</label>
+                            <ons-button modifier="large--cta" ng-click="genericSelectStart(buyOptions.shipping_ways, 'formaEnvio.id','formaEnvio.name', 'name', 'id', null, this)">
+                                <ons-icon icon="truck"></ons-icon>&nbsp{{formaEnvio.id?formaEnvio.name:'-- Seleccionar forma de envío (*) --'}}</ons-button>
+                        </ons-col>
+                    </ons-row>
+
+                    <ons-row style="margin-top: 10px;" ng-if="formaEnvio.id === 5">
+                        <ons-col>
+                            <label>Envío por C.A.:</label>
+                            <ons-button modifier="large--cta" ng-click="genericSelectStart(metodo_ca_options, 'metodo_ca.id','metodo_ca.name', 'name', 'id', null, this)">
+                                <ons-icon icon="building-o"></ons-icon>&nbsp{{metodo_ca.id?metodo_ca.name:'-- Seleccionar destino de envío --'}}</ons-button>
+                        </ons-col>
+                    </ons-row>
+
+                    <ons-col style="margin-top: 10px;" ng-if="formaEnvio.id === 5">
+                        <ons-row>
+                            <label>DNI(*):</label>
+                            <label>Obligatorio para envío por Correo Argentino.</label>
+                            <input type="text" ng-model="userData.profileData.DNI" req class="text-input--underbar" placeholder="DNI" value="" required>
+                        </ons-row>
+                    </ons-col>
+                    <ons-col style="margin-top: 10px;" ng-if="formaEnvio.id === 5 && metodo_ca.id === 4">
+                        <ons-row>
+                        <label>Sucursal Correo Argentino:</label>
+                            <ons-button modifier="large--cta" ng-click="genericSelectStart(sucursal_CA_options, 'sucursal_CA.id','sucursal_CA.name', 'name', 'code', getDireccionSucursalesCA, this)">
+                                <ons-icon icon="globe"></ons-icon>&nbsp{{sucursal_CA.id?sucursal_CA.name:'-- Seleccionar Sucursal --'}}</ons-button>
+                        </ons-row>
+                    </ons-col>
+
+                    <ons-col style="margin-top: 10px;" ng-if="formaEnvio.id === 5 && metodo_ca.id === 4 && sucursal_CA.id">
+                        <ons-row>
+                        <label>Dirección Sucursal Correo Argentino:</label>
+                            <ons-button modifier="large--cta" ng-click="genericSelectStart(sucursal_CA_direccion_options, 'sucursal_CA_direccion.id','sucursal_CA_direccion.name', 'description', 'id', null, this)">
+                                <ons-icon icon="globe"></ons-icon>&nbsp{{sucursal_CA_direccion.id?sucursal_CA_direccion.name:'-- Seleccionar Dirección Sucursal --'}}</ons-button>
+                        </ons-row>
+                    </ons-col>
+
+                    <ons-row style="margin-top: 10px;" ng-if="tipoDeEnvio.id === 4">
+                        <ons-col>
+                            <div class="alert-b alert-b-info" role="alert">
+                                Por favor especifique en el campo observaciones ubicado debajo la modalidad de envío que desea para este pedido.
+                            </div>
+                        </ons-col>
+                    </ons-row>
+
+                    <ons-row style="margin-top: 10px;">
+                        <ons-col>
+                            <!--- DATOS DE ENVIO -->
+                            <label>Dirección:</label>
+                            <input type="text" ng-model="userData.profileData.direccion" class="text-input--underbar" placeholder="dirección" value="" required>
+
+                            <label>Localidad:</label>
+                            <input type="text" ng-model="userData.profileData.localidad" class="text-input--underbar" placeholder="Localidad" value="" required>
+
+                            <label>Código postal:</label>
+                            <input type="text" ng-model="userData.profileData.codigo_postal" class="text-input--underbar" placeholder="Codigo Postal" value="" required>
+                            <label>Provincia: {{userData.profileData.provincia_id}}</label>
+                            <ons-button modifier="large--cta" ng-click="genericSelectStart(buyOptions.provinces, 'userData.profileData.provincia_id','userData.profileData.provincia_name', 'name', 'id', getSucursalesCA, this)">
+                                <ons-icon icon="globe"></ons-icon>&nbsp{{userData.profileData.provincia_id?findInArrayById(buyOptions.provinces, userData.profileData.provincia_id, 'id', 'name'):'-- Seleccionar provincia --'}}</ons-button>
+                            <label>Tipo de factura:</label>
+                            <ons-button modifier="large--cta" ng-click="genericSelectStart(buyOptions.billing_options, 'userData.profileData.iva_facturacion','userData.profileData.iva_facturacion_name', 'name', 'id', null, this)">
+                                <ons-icon icon="file-text-o"></ons-icon>&nbsp{{userData.profileData.iva_facturacion?findInArrayById(buyOptions.billing_options, userData.profileData.iva_facturacion, 'id', 'name'):'-- Seleccionar tipo de factura --'}}</ons-button>
+                            <div ng-show="opcionesDePago === 1 || opcionesDePago === 3">
+                                <input ng-required="opcionesDePago === 1 || opcionesDePago === 3" type="text" ng-model="cuit" class="text-input--underbar" placeholder="C.U.I.T" value="">
+                            </div>
+                            <!--- DATOS DE ENVIO -->
+                        </ons-col>
+                    </ons-row>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">Forma de pago</div>
+                <div class="panel-body">
+
+                    <label>Tipo de pago(*):</label>
+                    <ons-button modifier="large--cta" ng-click="genericSelectStart(buyOptions.pay_options, 'formaDePago','formaDePago_name', 'name', 'id', null, this)">
+                        <ons-icon icon="credit-card"></ons-icon>&nbsp{{formaDePago_name?formaDePago_name:'-- Seleccionar tipo de pago (*) --'}}</ons-button>
+
+                    <ons-row style="margin-top: 10px;" ng-if="formaDePago === 0">
+                        <ons-col>
+                            <div class="alert-b alert-b-info" role="alert">
+                                Verificaremos el stock de los productos dentro de las 24hs hábiles siguientes y te escribiremos con la confirmación y números de cuenta para realizar el depósito.
+                            </div>
+                        </ons-col>
+                    </ons-row>
+
+
+                    <ons-row style="margin-top: 10px;" ng-if="formaDePago === 3">
+                        <ons-col>
+                            <div class="alert-b alert-b-info" role="alert">
+                                <img style="width:100%; height:auto" src="http://imgmp.mlstatic.com/org-img/banners/ar/medios/online/575X40.jpg">
+                            </div>
+                        </ons-col>
+                    </ons-row>
+
+                    <ons-row style="margin-top: 10px;" ng-if="formaDePago === 2">
+                        <ons-col>
+                            <div class="alert-b alert-b-info" role="alert">
+                                Te llamaremos por teléfono para pedirte los datos de la tarjeta de crédito. El costo total con tarjeta es de ${{shoppingCart.cartData.summary.credit_amount}}.- ( hasta 3 cuotas sin intereses de: ${{Math.round((shoppingCart.cartData.summary.credit_amount / 3) * 100) / 100}}.- ). Ingrese su número de teléfono fijo para realizar la operación de pago:
+                            </div>
+                            <label>Teléfono:</label>
+                            <input type="text" ng-required="formaDePago === 2" ng-model="userData.profileData.telefono" class="text-input--underbar" placeholder="telefono" value="">
+
+                        </ons-col>
+                    </ons-row>
+                    <ons-row style="margin-top: 10px;">
+                        <ons-col>
+                            <label>Observaciones:</label>
+                            <textarea class="text-input--underbar" ng-model="observaciones" placeholder="Observaciones" style="font-size:19px;width: 100%; height: 100px;"></textarea>
+                        </ons-col>
+                    </ons-row>
+                </div>
+            </div>
+        </div>
+
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <div style="text-align: center" class="content-padded">
+                    <ons-button modifier="large" ng-click="enviarPedido()" should-spin="{{isWorking}}">Enviar Pedido</ons-button>
+                </div>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <div style="text-align: center" class="content-padded">
+                    <ons-button modifier="large--quiet" disabled="{{isWorking}}" ng-click="ons.navigator.popPage()">Mejor no</ons-button>
+                </div>
+            </ons-col>
+        </ons-row>
+    </form>
+</ons-page>

@@ -1,0 +1,42 @@
+<ons-page>
+    <module-header></module-header>
+    <div class="content-padded" ng-hide="loading">
+        <ons-row style="margin-top: 0px;">
+            <ons-col align="center">
+                <div>{{product.name}}</div>
+                <ul class="list list-top" ng-hide="isWorking">
+                    <div ng-repeat="review in product.reviews">
+                        <li class="list__item list__item--tappable list__item__line-height list-item-container product_question">
+                            <div class="list-item-main">
+                                <div class="list-item-left">
+                                    <img src="{{review.user.image}}" class="thumbnail">
+                                </div>
+                                <div class="list-item-right">
+                                    <div class="list-item-content">
+                                        <span class="list-item-name">{{review.user.name}}</span>
+                                        <br/>
+                                        <span class="list-item-text" style="margin-top:16px;">{{review.review}}
+                                        </span>
+                                        <br/>
+                                        <span class="list-item-text dark-orange" style="margin-top:16px;"><ons-icon ng-repeat="i in [1, 2, 3, 4, 5]" icon="{{i <= review.score?'star':'star-o'}}" ></ons-icon></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="list-item-action">
+                                <i class="fa fa-angle-right"></i>
+                            </span>
+                        </li>
+                    </div>
+                </ul>
+            </ons-col>
+        </ons-row>
+       
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <ons-button modifier="large" ng-click="ons.navigator.popPage()">volver</ons-button>
+            </ons-col>
+        </ons-row>
+
+
+    </div>
+</ons-page>

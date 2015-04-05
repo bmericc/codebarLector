@@ -1,0 +1,19 @@
+<ul class="list list-top" >
+    <li ng-repeat="category in categories[ons.navigator.getCurrentPage().options.categoryID]" class="list__item  list__item__line-height list-item-container" ng-click="showCategory(category.id)">
+        <div class="list-item-main">
+            <div class="list-item-left">
+                <img src="http://www.nakaoutdoors.com.ar/img/articulos/{{category.thumb}}" class="avator">
+            </div>
+            <div class="list-item-right">
+                <div class="list-item-content">
+                    <span class="list-item-name">{{category.title}}</span>
+                    <br/>
+                    <span class="lucent">{{category.description}}</span>
+                </div>
+            </div>
+        </div>
+        <span class="list-item-action">
+            <i class="fa fa-angle-right"></i>
+        </span>
+    </li>
+</ul>

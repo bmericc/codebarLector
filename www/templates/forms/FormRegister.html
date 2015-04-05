@@ -1,0 +1,22 @@
+<ons-page ng-controller="RegisterController" ng-init="init()">
+    <module-header></module-header>
+    <form novalidate name="formRegister" ng-submit="submitRegister()">
+        <ons-row style="margin-top: 0px;">
+            <ons-col align="center">
+
+                <input type="text" ng-model="nombre" class="text-input--underbar" placeholder="Nombre" value="" required>
+                <input type="text" ng-model="apellido" class="text-input--underbar" placeholder="Apellido" value="" required>
+                <input type="email" ng-model="email" class="text-input--underbar" placeholder="Email" value="" required>
+                <select required type="text" class="text-input--underbar select-combo" ng-model="provincia" ng-options="province.id as province.name for province in buyOptions.provinces">
+                    <option value="">-- Seleccionar provincia --</option>
+                </select>
+                <input type="text" ng-model="userName" class="text-input--underbar" placeholder="Nombre de usuario" value="" required>
+                <input type="password" ng-model="password" class="text-input--underbar" placeholder="Password" value="" required>
+                <input type="password" ng-model="passwordVerification" class="text-input--underbar" placeholder="Password Verification" value="" required>
+
+                <br>
+                <ons-button modifier="large" should-spin="{{isWorking}}" ng-click="submitRegister()">Registrarse</ons-button>
+            </ons-col>
+        </ons-row>
+    </form>
+</ons-page>

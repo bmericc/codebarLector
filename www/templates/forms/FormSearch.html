@@ -1,0 +1,13 @@
+<ons-page class="center">
+    <module-header></module-header>
+        <!-- Solo se muestra si es un listado de productos -->
+        <module-product-list ng-hide="isWorking && lastPage == 1"></module-product-list>
+        <module-loading-spinner ng-show="isWorking"></module-loading-spinner>
+        <ons-row style="margin-top: 0px;" ng-show="products.length < searchTotal">
+            <ons-col align="center">
+                <div style="text-align: center" class="content-padded">
+                    <ons-button ng-click="search(searchString, lastPage + 1)" modifier="large">Mas...</ons-button>
+                </div>
+            </ons-col>
+        </ons-row>
+</ons-page>

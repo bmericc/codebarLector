@@ -1,0 +1,10 @@
+<ons-page class="center">
+    <module-header></module-header>
+    <!-- Solo se muestra si es una categoría -->
+    <div style="text-align: center" class="content-padded" ng-hide="loading"  ng-init="categoryPageInit()">
+        <module-product-list></module-product-list>
+    </div>
+
+    <module-loading-spinner ng-show="loading && !connectionFail"></module-loading-spinner>
+    <module-sin-conexion ng-show="connectionFail"></module-sin-conexion>
+</ons-page>

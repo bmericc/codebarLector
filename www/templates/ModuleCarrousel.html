@@ -1,0 +1,9 @@
+<ul ng-controller="CarrouselController" rn-carousel rn-carousel-indicator rn-carousel-swipe="{{true}}" class="my-slider ng-cloak">
+    <li ng-repeat="slide in destacadosHome" ng-style="{'background-color': '#000000','background-position': 'center','background-repeat':'no-repeat', 'background-image': 'url(http://www.nakaoutdoors.com.ar/img/articulos/' + slide.thumb + ')'}">
+        <div class="debug">
+            {{slide.title}}
+            <br>Stock: {{ slide.stock }}
+            <br>
+        </div>
+    </li>
+</ul>

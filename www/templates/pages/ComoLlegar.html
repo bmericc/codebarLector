@@ -1,0 +1,29 @@
+<ons-page ng-controller="ContactController as ContactCtrl">
+    <module-header></module-header>
+    <ons-row style="margin-top: 0px;">
+        <ons-col>
+            <div class="content-padded">
+                <div class="panel">
+                    <div class="panel-heading">Casa Central – Vte. López (Bs As)</div>
+                    <div class="panel-body" align="center">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3286.9235736163982!2d-58.48021661943669!3d-34.530164229394096!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb6b409bb3ac3%3A0x1cde0699acd2570a!2sAv+Maip%C3%BA+872!5e0!3m2!1ses-419!2sar!4v1392827262680" width="100%" height="200" frameborder="0" style="border:0"></iframe>
+                        <ons-button modifier="large" ng-click="askCallSucursal(cods_sucursal.VICENTE_LOPEZ)">
+                            <ons-icon icon="phone"></ons-icon>Llamar ahora
+                        </ons-button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">Sucursal Capital – Villa Urquiza</div>
+                    <div class="panel-body" align="center">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3285.352265647589!2d-58.4927802!3d-34.56995215!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb658bba56ca3%3A0xd6bd0bc140d3d866!2sRufino+3086!5e0!3m2!1ses-419!2sar!4v1392827529337" width="100%" height="200" frameborder="0" style="border:0"></iframe>
+                        <ons-button modifier="large" ng-click="askCallSucursal(cods_sucursal.CAPITAL)">
+                            <ons-icon icon="phone"></ons-icon>Llamar ahora
+                        </ons-button>
+                    </div>
+                </div>
+                <ons-button modifier="large" ng-click="ons.navigator.popPage()">volver</ons-button>
+        </ons-col>
+    </ons-row>
+    </div>
+</ons-page>

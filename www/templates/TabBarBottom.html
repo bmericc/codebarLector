@@ -1,0 +1,20 @@
+<ons-tabbar>
+    <ons-tabbar-item active="true" label="Home" icon="home" page="templates/pages/PageHome.html" animation="lift">
+    </ons-tabbar-item>
+
+    <ons-tabbar-item label="Contacto" icon="phone" ng-hide="userData.logedIn" ng-click="ons.navigator.pushPage('templates/pages/PageContacto.html');">
+    </ons-tabbar-item>
+
+    <ons-tabbar-item ng-hide="userData.logedIn" label="Login" icon="user" ng-click="ons.navigator.pushPage('templates/forms/FormLogin.html')">
+    </ons-tabbar-item>
+
+    <ons-tabbar-item ng-show="userData.logedIn" label="Perfil" icon="user" ng-controller="LoginController" ng-click="ons.navigator.pushPage('templates/forms/FormProfile.html')">
+    </ons-tabbar-item>
+
+    <ons-tabbar-item ng-show="userData.logedIn" label="Logout" icon="sign-out" ng-controller="LoginController" ng-click="logout(true)">
+    </ons-tabbar-item>
+
+    <ons-tabbar-item label="Lector de Código" icon="barcode" ng-click="barCodeScan()">
+
+    </ons-tabbar-item>
+</ons-tabbar>

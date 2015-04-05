@@ -1,0 +1,13 @@
+<ons-page>
+    <module-header></module-header>
+    <div class="content-padded" ng-hide="loading">
+        <ons-row style="margin-top: 0px;">
+            <ons-col>
+                <ons-list  ng-repeat="selectOption in genericSelect.options">
+                    <ons-list-header ng-if="$index == 0 || selectOption.stock != genericSelect.options[$index-1].stock"><b>{{selectOption.stock}}</b></ons-list-header>
+                    <ons-list-item modifier="tappable" ng-click="genericSelectOptionClick(selectOption)">{{selectOption[genericSelect.labelFieldName]}}</ons-list-item>
+                </ons-list>
+            </ons-col>
+        </ons-row>
+    </div>
+</ons-page>

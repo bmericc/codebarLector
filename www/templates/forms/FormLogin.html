@@ -1,0 +1,31 @@
+<ons-page ng-controller="LoginController" ng-init="init()">
+
+    <module-header></module-header>
+
+    <ons-row style="margin-top: 0px;">
+        <ons-col>
+            <div class="content-padded">
+                <form ng-submit="login()">
+
+                    <label>Usuario o e-mail:</label>
+                    <input type="text" ng-model="userData.userName" class="text-input" placeholder="Usuario o e-mail" value="">
+                    <label>Password:</label>
+                    <input type="password" ng-model="userData.password" class="text-input" placeholder="Password" value="">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </form>
+                <ons-button modifier="large" should-spin="{{isWorking}}" ng-click="login()">Ingresar</ons-button>
+            </div>
+        </ons-col>
+    </ons-row>
+    <ons-row style="margin-top: 10px;">
+        <ons-col align="center">
+            <div style="text-align: center" class="content-padded">
+                <ons-button modifier="large" disabled="{{isWorking}}" ng-click="ons.navigator.pushPage('templates/forms/FormRegister.html')">Registrarse</ons-button>
+            </div>
+        </ons-col>
+    </ons-row>
+
+</ons-page>

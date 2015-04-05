@@ -1,0 +1,7 @@
+<ons-page class="center">
+    <module-header></module-header>
+    <!-- Solo se muestra si es un listado de productos -->
+    <module-product-list ng-hide="isWorking || connectionFail"></module-product-list>
+    <module-loading-spinner ng-show="isWorking && !connectionFail"></module-loading-spinner>
+    <module-sin-conexion ng-show="connectionFail"></module-sin-conexion>
+</ons-page>

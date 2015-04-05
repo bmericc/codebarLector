@@ -1,0 +1,19 @@
+<ons-page ng-controller="LoginController" ng-init="init()">
+    <module-header></module-header>
+    <ons-row style="margin-top: 20px;">
+        <ons-col align="center">
+            <img class="profile-image" src="{{userData.profileData.imagen}}">
+            <br>
+            <ons-list>
+                <ons-list-item ng-if="userData.pendingCalifications.length === 0" modifier="chevron">
+                    <ons-icon ng-class="'dark-orange'" icon="star-o"></ons-icon>Sin calificaciones aún.</ons-list-item>
+                <ons-list-item ng-if="userData.pendingCalifications.length > 0" modifier="chevron" ng-click="ons.navigator.pushPage('templates/modules/profile/pendingCalifications.html')">
+                    <ons-icon ng-class="'dark-orange'" icon="star-o"></ons-icon>{{userData.pendingCalifications.length}} calificaciones pendientes.</ons-list-item>
+
+
+                <profile-read ng-hide="editMode"></profile-read>
+                <profile-edit ng-show="editMode"></profile-edit>
+            </ons-list>
+        </ons-col>
+    </ons-row>
+</ons-page>

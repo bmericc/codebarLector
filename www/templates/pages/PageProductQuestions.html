@@ -1,0 +1,69 @@
+<ons-page>
+    <module-header></module-header>
+    <div class="content-padded" ng-hide="loading">
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <ons-button modifier="large" ng-click="ons.navigator.pushPage('templates/forms/FormQuestionOnProduct.html')">Consultar</ons-button>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 5px;">
+            <ons-col align="center">
+                <div>{{product.name}}</div>
+                <ul class="list list-top" ng-hide="isWorking">
+                    <div ng-repeat="question in product.questions">
+                        <li class="list__item list__item--tappable list__item__line-height list-item-container product_question">
+                            <div class="list-item-main">
+                                <div class="list-item-left">
+                                    <img src="{{question.user.image}}" class="thumbnail">
+                                </div>
+                                <div class="list-item-right">
+                                    <div class="list-item-content">
+                                        <span class="list-item-name">{{question.user.name}} ({{question.question_date}})</span>
+                                        <br/>
+                                        <span class="list-item-text" style="margin-top:16px;">{{question.message}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="list-item-action">
+                                <i class="fa fa-angle-right"></i>
+                            </span>
+                        </li>
+
+
+                        <li class="list__item list__item--tappable list__item__line-height list-item-container question_response" ng-if="question.response">
+                            <div class="list-item-main">
+                                <div class="list-item-left">
+                                    <img src="{{question.seller.image}}" class="thumbnail">
+                                </div>
+                                <div class="list-item-right">
+                                    <div class="list-item-content">
+                                        <span class="list-item-name">Respuesta de {{question.seller.name}} ({{question.response_date}})</span>
+                                        <br/>
+                                        <span class="list-item-text" style="margin-top:16px;" ng-bind-html="question.response">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="list-item-action">
+                                <i class="fa fa-angle-right"></i>
+                            </span>
+                        </li>
+                    </div>
+                </ul>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <ons-button modifier="large" ng-click="ons.navigator.pushPage('templates/forms/FormQuestionOnProduct.html')">Consultar</ons-button>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <ons-button modifier="large" ng-click="ons.navigator.popPage()">volver</ons-button>
+            </ons-col>
+        </ons-row>
+
+
+    </div>
+</ons-page>

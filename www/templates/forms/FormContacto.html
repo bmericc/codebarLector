@@ -1,0 +1,31 @@
+<ons-page ng-controller="ContactFormController">
+    <module-header></module-header>
+
+    <form name="formContact" novalidate ng-submit="">
+        <ons-row style="margin-top: 20px;">
+            <ons-col align="center">
+                <input type="text" ng-model="nombre" class="text-input--underbar" placeholder="Nombre" value="" required>
+                <input type="email" ng-model="email" class="text-input--underbar" class="text-input--underbar" placeholder="Email" value="" required>
+                <input type="text" ng-model="telefono" class="text-input--underbar" placeholder="Telefono" value="" required>
+                <input type="text" ng-model="ubicacion" class="text-input--underbar" placeholder="Ubicación" value="" required>
+                <br>
+                <textarea required class="text-input--underbar" ng-model="consulta" placeholder="Ingrese su consulta" style="font-size:19px;width: 80%; height: 100px;"></textarea>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <div style="text-align: center" class="content-padded">
+                    <ons-button modifier="large" type="submit" should-spin="{{isWorking}}" ng-click="submitContact()">Contactar</ons-button>
+                </div>
+            </ons-col>
+        </ons-row>
+    </form>
+    <ons-row style="margin-top: 10px;">
+        <ons-col align="center">
+            <div style="text-align: center" class="content-padded">
+                <ons-button modifier="large--quiet" disabled="{{isWorking}}" ng-click="goBack()">Mejor no</ons-button>
+            </div>
+        </ons-col>
+    </ons-row>
+
+</ons-page>

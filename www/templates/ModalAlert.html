@@ -1,0 +1,29 @@
+<ons-modal var="modalAlert">
+    <div class="content-padded">
+        <div class="panel">
+            <div class="panel-heading">
+                <ons-icon icon="exclamation"></ons-icon>A la flauta!!!</div>
+            <div class="panel-body">
+                <ons-row>
+                    <ons-col>
+                        <img style="width: 50%; height:auto; max-width: 200px " src="imgs/GalloAlvarezVolando.png">
+                    </ons-col>
+                </ons-row>
+                <ons-row style="margin-top: 10px;">
+                    <ons-col >
+                        <span style="white-space: normal;">
+                            Parece que tu conexión a internet se pegó una volada. <br>
+                            Dejala descansar un rato y dale otro pegue.
+                        </span>
+                    </ons-col>
+                </ons-row>
+                <ons-row style="margin-top: 10px;">
+                    <ons-col>
+                        <ons-button modifier="large" ng-click="modalAlert.hide()">Cerrar</ons-button>
+                    </ons-col>
+                </ons-row>
+
+            </div>
+        </div>
+    </div>
+</ons-modal>

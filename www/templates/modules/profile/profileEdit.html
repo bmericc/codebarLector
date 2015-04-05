@@ -1,0 +1,104 @@
+<!--<ons-button modifier="large" should-spin="{{isWorking}}" ng-click="takePicture()">
+    <ons-icon icon="camera"></ons-icon>Subir foto de perfil</ons-button>
+-->
+<br>
+<ons-button modifier="large" ng-if="false" should-spin="{{isWorking}}" ng-click="getPictureFromGallery()">
+    <ons-icon icon="camera"></ons-icon>Obtener foto de la galeria</ons-button>
+<br>
+
+<form novalidate name="formUser" ng-submit="saveProfile()">
+    <ons-button modifier="large" should-spin="{{isWorking}}" ng-click="saveProfile()">Guardar</ons-button>
+    <div class="content-padded">
+        <div class="panel">
+            <div class="panel-heading">Editar mis datos</div>
+            <div class="panel-body">
+                <label>Nombre:</label>
+                <input type="text" ng-model="userData.profileData.nombre" class="text-input--underbar" placeholder="Nombre" value="" required>
+
+
+                <label>Apellido:</label>
+                <input type="text" ng-model="userData.profileData.apellido" class="text-input--underbar" placeholder="Apellido" value="" required>
+
+                <label>e-mail:</label>
+                <input type="email" ng-model="userData.profileData.mail" class="text-input--underbar" placeholder="Email" value="" required>
+
+                <label>Telefono:</label>
+                <input type="text" ng-model="userData.profileData.telefono" class="text-input--underbar" placeholder="telefono" value="">
+
+                <label>Código de área:</label>
+                <input type="text" ng-model="userData.profileData.cod_area" class="text-input--underbar" placeholder="código de área" value="">
+
+                <label>Celular:</label>
+                <input type="text" ng-model="userData.profileData.celular" class="text-input--underbar" placeholder="celular" value="">
+            </div>
+        </div>
+    </div>
+    <div class="content-padded">
+        <div class="panel">
+            <div class="panel-heading">Editar mis datos</div>
+            <div class="panel-body">
+                <label>Dirección:</label>
+                <input type="text" ng-model="userData.profileData.direccion" class="text-input--underbar" placeholder="dirección" value="">
+
+                <label>Provincia:</label>
+                <ons-button modifier="large--cta" ng-click="genericSelectStart(buyOptions.provinces, 'userData.profileData.provincia_id','userData.profileData.provincia_name', 'name', 'id', null, this)">
+                    <ons-icon icon="globe"></ons-icon>&nbsp{{userData.profileData.provincia_id?findInArrayById(buyOptions.provinces, userData.profileData.provincia_id, 'id', 'name'):'-- Seleccionar provincia --'}}</ons-button>
+
+                <label>Terminal de envío:</label>
+                <input type="text" ng-model="userData.profileData.terminal" class="text-input--underbar" placeholder="Terminal" value="">
+
+                <label>Localidad:</label>
+                <input type="text" ng-model="userData.profileData.localidad" class="text-input--underbar" placeholder="localidad" value="">
+
+                <label>Partido:</label>
+                <input type="text" ng-model="userData.profileData.partido" class="text-input--underbar" placeholder="partido" value="">
+
+                <label>Código postal:</label>
+                <input type="text" ng-model="userData.profileData.codigo_postal" class="text-input--underbar" placeholder="cod. postal" value="">
+            </div>
+        </div>
+    </div>
+
+    <div class="content-padded">
+        <div class="panel">
+            <div class="panel-heading">Datos de Facturación (no obl.)</div>
+            <div class="panel-body">
+                <label>Tipo de factura {{userData.profileData.iva_facturacion}}:</label>
+                <ons-button modifier="large--cta" ng-click="genericSelectStart(buyOptions.billing_options, 'userData.profileData.iva_facturacion','userData.profileData.iva_name', 'name', 'id', null, this)">
+                    <ons-icon icon="file-text-o"></ons-icon>&nbsp{{userData.profileData.iva_facturacion?findInArrayById(buyOptions.billing_options, userData.profileData.iva_facturacion, 'id', 'name'):'-- Seleccionar tipo de factura --'}}</ons-button>
+
+
+                <div ng-show="userData.profileData.iva_facturacion === 1 || userData.profileData.iva_facturacion === 3">
+                    <label>Razón social:</label>
+                    <input type="text" ng-model="userData.profileData.razon_social" class="text-input--underbar" placeholder="razón social" value="">
+                    <label>Nombre de fantasía:</label>
+                    <input type="text" ng-model="userData.profileData.nombre_fantasia" class="text-input--underbar" placeholder="Nombre de Fantasía" value="">
+
+
+                    <label>Dirección de facturación:</label>
+                    <input type="text" ng-model="userData.profileData.dir_facturacion" class="text-input--underbar" placeholder="dirección de facturación" value="">
+
+                    <label>C.U.I.T:</label>
+                    <input type="text" ng-model="userData.profileData.cuit" class="text-input--underbar" placeholder="cuit" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-padded">
+        <div class="panel">
+            <div class="panel-heading">Datos de Acceso</div>
+            <div class="panel-body">
+                <label>Login:</label>
+                <input type="text" ng-model="userData.userName" class="text-input--underbar" placeholder="Nombre de Usuario" value="" required>
+
+                <label>Contraseña:</label>
+                <input type="password" ng-model="userData.password" class="text-input--underbar" placeholder="Password" value="" required>
+
+                <label>Confirmar Contraseña:</label>
+                <input type="password" ng-model="userData.check_password" class="text-input--underbar" placeholder="Check Password" value="" required>
+
+            </div>
+        </div>
+    </div>
+    <ons-button modifier="large" should-spin="{{isWorking}}" ng-click="saveProfile()">Guardar</ons-button>
+</form>

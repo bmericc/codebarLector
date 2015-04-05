@@ -1,0 +1,39 @@
+<ons-page ng-controller="ContactController as ContactCtrl">
+    <module-header></module-header>
+
+    <ons-row style="margin-top: 100px;">
+        <ons-col align="center">
+            <div style="text-align: center" class="content-padded">
+                <ons-button modifier="large" ng-click="askCallSucursal(cods_sucursal.VICENTE_LOPEZ)">
+                    <ons-icon icon="phone"></ons-icon>Sucursal Vicente Lopez
+                </ons-button>
+        </ons-col>
+        </div>
+    </ons-row>
+
+    <ons-row style="margin-top: 10px;">
+        <ons-col align="center">
+            <div style="text-align: center" class="content-padded">
+                <ons-button modifier="large" ng-click="askCallSucursal(cods_sucursal.CAPITAL)">
+                    <ons-icon icon="phone"></ons-icon>Sucursal Capital Federal
+                </ons-button>
+            </div>
+        </ons-col>
+    </ons-row>
+
+    <ons-row style="margin-top: 10px;">
+        <ons-col align="center">
+            <div style="text-align: center" class="content-padded">
+                <ons-button modifier="large" ng-click="ons.navigator.pushPage('templates/forms/FormContacto.html')">
+                    <ons-icon icon="envelope-o"></ons-icon>Enviar Consulta
+                </ons-button>
+            </div>
+        </ons-col>
+    </ons-row>
+    <ons-row style="margin-top: 10px;">
+        <ons-col align="center">
+
+        </ons-col>
+    </ons-row>
+    <iframe ng-hide="true" name="silentFrame" width="1px" height="1px"></iframe>
+</ons-page>

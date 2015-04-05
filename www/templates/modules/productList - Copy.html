@@ -1,0 +1,111 @@
+<ons-row style="margin-top: 0px;" ng-if="!isCart">
+    <ons-col align="center">
+        <select style="margin-top: 3px;" type="number" ng-change="refreshCurrentProductList()" ng-show="sortOptions.options" ng-model="sortOptions.selectedSortOption" ng-options="sortOption.id as sortOption.description for sortOption in sortOptions.options" class="text-input--underbar select-combo">
+            <option value="">-- Elija una opción --</option>
+        </select>
+    </ons-col>
+</ons-row>
+
+<!-- Solo se muestra si es un listado de productos -->
+<ul class="list list-top" ng-if="!isCart">
+    <li ng-repeat="product in products" class="list__item list__item__line-height list-item-container" ng-click="showProduct(product.id)">
+        <div class="list-item-main">
+            <div class="list-item-left">
+                <img src="http://www.nakaoutdoors.com.ar/img/articulos/{{product.thumb}}" class="thumbnail">
+            </div>
+            <div class="list-item-right">
+                <div class="list-item-content">
+                    <span class="list-item-name">{{product.title}} &nbsp;
+                        <br/>
+                        <span ng-if="product.offer > 0">
+                            <ons-icon icon="money" style="color: green;"></ons-icon>&nbsp;
+                            <span class="stryke-trough">$ {{product.price}}</span>&nbsp;&nbsp;
+                    <ons-icon icon="certificate" style="color: red"></ons-icon>&nbsp;
+                    <span style="color: red">$ {{product.offer_price}}</span>
+                    </span>
+
+                    <span ng-if="product.offer == 0">
+                            <ons-icon icon="credit-card" style="color: black"></ons-icon>&nbsp; $ {{product.credit_price}}<br>
+                            <ons-icon icon="money" style="color: green"></ons-icon>&nbsp;
+                            <span style="color: red">$ {{product.price}}</span>
+                    </span>
+                    </span>
+
+                    <br/>
+                    <span class="list-item-text" style="margin-top:16px;">
+                        <module-stock-color-codes></module-stock-color-codes>
+                        <!-- NUEVO -->
+                        <ons-icon ng-if="product.nuevo==1" icon="certificate" style="color:red"></ons-icon>
+                        {{product.nuevo=='1'?'Nuevo!':''}}
+                        <ons-icon ng-if="product.offer!=0" icon="bullhorn" style="color:black"></ons-icon>
+                        {{product.offer!='0'?'Oferta!':''}}
+
+                    </span>
+                    <br/>
+                    <span class="list-item-text" style="margin-top:16px;">{{product.description.length
+                        < 100?product.description:product.description.substr(0, 100) + '...'}} </span>
+                </div>
+            </div>
+        </div>
+        <span class="list-item-action">
+            <i class="fa fa-angle-right"></i>
+        </span>
+    </li>
+</ul>
+<!-- PRODUCTOS DEL CARRITO DE COMPRAS -->
+<ul class="list list-top" ng-if="isCart">
+    <li ng-repeat="product in shoppingCart.cartData.items" class="list__item list__item__line-height list-item-container">
+        <div class="list-item-main">
+            <div class="list-item-left">
+                <img src="http://www.nakaoutdoors.com.ar/img/articulos/{{product.thumb}}" class="thumbnail">
+
+            </div>
+            <div class="list-item-right">
+                <div class="list-item-content">
+                    <span class="list-item-name">{{product.title}} &nbsp;
+                        <br/>
+                        <span>
+                            <ons-icon icon="credit-card" style="color: black"></ons-icon>&nbsp; $ {{product.credit_price}}
+                            <br> 
+                            <ons-icon icon="money" style="color: green"></ons-icon>&nbsp;
+                            <span style="color: red">$ {{product.price}}</span>
+                    <br>
+                    <div ng-if="product.option != 'null'">
+                    <ons-icon  icon="bookmark" style="color: black"></ons-icon><span> {{product.option}}</span>
+                    <br>
+                    </div>
+                    </span>
+                    </span>
+
+                    <br/>
+                    <span class="list-item-text" style="margin-top:16px;">
+                        <!--- STOCK -->
+                        <ons-icon icon="circle" style="color:{{product.stock==1?'green':product.stock==2?'yellow':product.stock==3?'red':'grey'}}"></ons-icon>
+                        {{product.stock==1?'En Stock':product.stock==2?'Consultar':product.stock==3?'Sin Stock':'Proximamente'}}
+                        <!-- NUEVO -->
+                        <ons-icon ng-if="product.nuevo==1" icon="certificate" style="color:red"></ons-icon>
+                        {{product.nuevo=='1'?'Nuevo!':''}}
+                        <ons-icon ng-if="product.offer!=0" icon="bullhorn" style="color:black"></ons-icon>
+                        {{product.offer!='0'?'Oferta!':''}}
+
+                    </span>
+                    <br/>
+                    <span class="list-item-text" style="margin-top:16px;"><b>Cantidad :</b> {{product.quantity}}</span>
+                </div>
+            </div>
+        </div>
+        <ons-button modifier="large" should-spin="{{isWorking}}" ng-click="eliminarDelCarrito(product.cart_id)">
+            <ons-icon icon="fa-trash-o"></ons-icon>
+            </ons-icon>
+        </ons-button>
+        <br>
+    </li>
+
+</ul>
+<ons-row style="padding:20px" ng-if="(shoppingCart.cartData.items.length === 0 && isCart) || (products.length === 0 && !isCart)" style="margin-top: 0px;">
+    <ons-col align="center">
+        <div class="alert-b alert-b-success" style="text-align: center" role="alert">
+            No hay productos para mostrar.
+        </div>
+    </ons-col>
+</ons-row>

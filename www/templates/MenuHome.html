@@ -1,0 +1,47 @@
+<div style="text-align: center" class="content-padded">
+    <div ng-hide="categories.length == 0">
+        <ons-row ng-hide="connectionFail">
+            <ons-col class="cadorna2 list__item--tappable" ng-click="getNewProducts()">
+                <img width="50px" height="50px" src="imgs/icons/nuevos256.jpg">
+                <div class="cadorna">Nuevos</div>
+            </ons-col>
+            <ons-col class="cadorna2 list__item--tappable" ng-click="getOfertas()">
+                <img width="50px" height="50px" src="imgs/icons/ofertas256.jpg">
+                <div class="cadorna">Ofertas</div>
+            </ons-col>
+            <ons-col class="cadorna2 list__item--tappable" ng-click="ons.navigator.pushPage('templates/pages/ComoLlegar.html')">
+                <img width="50px" height="50px" src="imgs/icons/tiendas256.jpg">
+                <div class="cadorna">Como Llegar</div>
+            </ons-col>
+        </ons-row>
+
+
+
+        <ons-row style="padding-top: 10px">
+            <ons-col ng-repeat="category in categories[0]" class="list__item--tappable" ng-if="$index < 3" ng-click="showCategory(category.id)">
+                <img width="50px" height="50px" src="http://www.nakaoutdoors.com.ar/img/articulos/{{category.thumb}}">
+                <div class="cadorna">{{category.title}}</div>
+            </ons-col>
+        </ons-row>
+        <ons-row style="padding-top: 10px">
+            <ons-col ng-repeat="category in categories[0]" class="list__item--tappable" ng-if="$index > 2" ng-click="showCategory(category.id)">
+                <img width="50px" height="50px" src="http://www.nakaoutdoors.com.ar/img/articulos/{{category.thumb}}">
+                <div class="cadorna">{{category.title}}</div>
+            </ons-col>
+            <ons-col class="list__item--tappable" ng-click="ons.navigator.pushPage('templates/pages/PageContacto.html')">
+                <img width="50px" height="50px" src="imgs/icons/contacto256.jpg">
+                <div class="cadorna">Contacto</div>
+            </ons-col>
+        </ons-row>
+<!--         <ons-col>
+            <ons-row>
+               <ons-button modifier="large" ng-click="genericSelectStart(sarasaOptions, sarasa, null, null, onSelectTestButton)">{{'--' + sarasa.label + '--'}}</ons-button>
+            </ons-row>
+        </ons-col> -->
+    </div>
+
+
+
+    <module-loading-spinner ng-show="categories.length == 0 && !connectionFail"></module-loading-spinner>
+    <module-sin-conexion ng-show="connectionFail"></module-sin-conexion>
+</div>

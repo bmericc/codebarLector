@@ -1,0 +1,43 @@
+<ons-page ng-controller="CartController">
+    <module-header></module-header>
+    <div class="content-padded" ng-hide="loading">
+        <ons-row style="margin-top: 20px;">
+            <ons-col align="center">
+                <div>{{product.title}}</div>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 10px;">
+            <ons-col>
+                <ons-list>
+
+
+
+                    <ons-list-header>Cantidad</ons-list-header>
+                    <ons-list-item align="center">
+                        <ons-button ng-click="quantityDecrement()">
+                            <ons-icon icon="minus"></ons-icon>
+                        </ons-button>
+                        <input type="number" min="1" ng-model="cantidad" class="text-input number-input" style="margin-top: 8px;" placeholder="Cantidad">
+                        <ons-button ng-click="quantityIncrement()">
+                            <ons-icon icon="plus"></ons-icon>
+                        </ons-button>
+                        <br>
+                        <select required ng-show="product.options" type="number" ng-model="talle" ng-options="talleOption as talleOption.name group by talleOption.stock for talleOption in product.options" class="text-input--underbar select-combo">
+                            <option value="">-- Elija una opción --</option>
+                        </select>
+                    </ons-list-item>
+                </ons-list>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <ons-button modifier="large" should-spin="{{isWorking}}" ng-click="addToCart()">Agregar al Carrito</ons-button>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 10px;">
+            <ons-col align="center">
+                <ons-button modifier="large" disabled="{{isWorking}}" ng-click="ons.navigator.popPage()">volver</ons-button>
+            </ons-col>
+        </ons-row>
+    </div>
+</ons-page>

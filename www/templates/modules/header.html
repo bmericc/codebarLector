@@ -1,0 +1,27 @@
+<ons-toolbar>
+    <div class="left">
+        <ons-toolbar-button class="bars-in-logo" ng-click="menu.toggleMenu()" ng-show="ons.navigator.getPages().length <= 1">
+            <ons-icon icon="bars"></ons-icon>
+            <img class="logo" width="30px" height="36px" class="logo-image" src="imgs/header_logo.png">
+        </ons-toolbar-button>
+        <ons-back-button ng-hide="ons.navigator.getPages().length <= 1">
+        </ons-back-button>
+        <ons-toolbar-button class="back-button-image" ng-hide="ons.navigator.getPages().length <= 1" ng-click="backButtonHandler()">
+            <img width="30px" height="36px" class="logo-image" src="imgs/header_logo.png">
+        </ons-toolbar-button>
+    </div>
+    <div class="center">
+        <form ng-ifd="ons.navigator.getCurrentPage().name != 'templates/forms/FormSearch.html'" ng-submit="search(searchString)">
+            <input type="search" ng-model="searchString" value="" placeholder="Buscar..." class="display-block search-input">
+        </form>
+    </div>
+    <div class="right">
+        <!--<ons-toolbar-button ng-if="ons.navigator.getCurrentPage().name != 'templates/pages/PageContacto.html'" ng-click="ons.navigator.pushPage('templates/pages/PageContacto.html');">
+            <ons-icon icon="phone"></ons-icon>
+        </ons-toolbar-button>-->
+        <ons-toolbar-button ng-if="ons.navigator.getCurrentPage().name != 'templates/pages/Cart.html'" ng-click="ons.navigator.pushPage('templates/pages/Cart.html')">
+            <ons-icon icon="shopping-cart"></ons-icon>
+            <span class="notification" ng-show="shoppingCart.cartData.summary.quantity" style="margin-left: -12px">{{shoppingCart.cartData.summary.quantity}}</span>
+        </ons-toolbar-button>
+    </div>
+</ons-toolbar>
