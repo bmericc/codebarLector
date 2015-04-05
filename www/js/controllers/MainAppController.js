@@ -433,29 +433,10 @@
                 "Cancelled: " + result.cancelled);*/
             messageWindow("We got a barcode\n" +
                 "Result: " + result.code + "\n" +
-                "Format: " + result.type + (result.isGS1 ? " (GS1)" + "\n" +
+                "Format: " + result.type + (result.isGS1 ? " (GS1)":"") + "\n" +
                 "Cancelled: " + result.type == 'Cancel'?true:false);
 
         }
-
-
-        function(result) {
-
-            console.log('MWBScanner Defined callback Invoked');
-
-            /*
-            result.code - string representation of barcode result
-            result.type - type of barcode detected
-            result.bytes - bytes array of raw barcode result
-            */
-
-            if (result.type == 'Cancel') {
-                //Perform some action on scanning canceled if needed
-            } else if (result && result.code) {
-                navigator.notification.alert(result.code, function() {}, result.type + (result.isGS1 ? " (GS1)" : ""), 'Close');
-            }
-        }
-
 
         $scope.barCodeScanError = function(error) {
             promptError("Scanning failed: " + error);
