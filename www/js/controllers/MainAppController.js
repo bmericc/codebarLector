@@ -427,14 +427,15 @@
         }
 
         $scope.barCodeScanSuccess = function(result) {
+
             /*           prompt("We got a barcode\n" +
                 "Result: " + result.text + "\n" +
                 "Format: " + result.format + "\n" +
                 "Cancelled: " + result.cancelled);*/
             messageWindow("We got a barcode\n" +
                 "Result: " + result.code + "\n" +
-                "Format: " + result.type + (result.isGS1 ? " (GS1)":"") + "\n" +
-                "Cancelled: " + result.type == 'Cancel'?true:false);
+                "Format: " + result.type + (result.isGS1 ? " (GS1)" : "") + "\n" +
+                "Cancelled: " + (result.type == 'Cancel' ? true : false));
 
         }
 
